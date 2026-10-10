@@ -59,15 +59,15 @@ export const balloonTrainingConfig: Record<LevelId, {
   holdWindowMs: number;
   successOverlapMs: number;
 }> = {
-  L1: { quota: 4, holdWindowMs: 12000, successOverlapMs: 1400 },
-  L2: { quota: 5, holdWindowMs: 11000, successOverlapMs: 1800 },
-  L3: { quota: 6, holdWindowMs: 10000, successOverlapMs: 2200 },
+  L1: { quota: 4, holdWindowMs: 8000, successOverlapMs: 3000 },
+  L2: { quota: 5, holdWindowMs: 12000, successOverlapMs: 6000 },
+  L3: { quota: 6, holdWindowMs: 16000, successOverlapMs: 10000 },
 };
 
 export const balloonTestProtocol = {
   trialCount: 6,
-  holdWindowMs: 11000,
-  successOverlapMs: 1800,
+  holdWindowMs: 14000,
+  successOverlapMs: 6000,
   materialSet: 'TOUCH_01_A_prototype',
   actorIdentityMethod: 'fixed-side-pointerdown-prototype',
   validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION',
