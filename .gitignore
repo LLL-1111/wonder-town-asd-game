@@ -1,0 +1,16 @@
+node_modules/
+node_modules.incomplete-*/
+dist/
+.pnpm-store/
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+.DS_Store
+.migration-backup-*/
+DesignTest1/
+.netlify/
+.env
+.env.*
+!.env.example
+*.log
+coverage/

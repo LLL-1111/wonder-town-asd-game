@@ -1,0 +1,40 @@
+@echo off
+setlocal
+
+cd /d "%~dp0"
+
+set "LOCAL_NODE_HOME=E:\Application\Nodejs"
+set "LOCAL_PNPM_HOME=E:\Application\pnpm-global"
+set "PATH=%LOCAL_NODE_HOME%;%LOCAL_PNPM_HOME%;%PATH%"
+
+if not exist "%LOCAL_NODE_HOME%\node.exe" (
+  echo [错误] 未找到独立 Node.js：%LOCAL_NODE_HOME%\node.exe
+  pause
+  exit /b 1
+)
+
+if not exist "%LOCAL_PNPM_HOME%\pnpm.cmd" (
+  echo [错误] 未找到独立 pnpm：%LOCAL_PNPM_HOME%\pnpm.cmd
+  pause
+  exit /b 1
+)
+
+echo 奇妙小镇项目目录：%CD%
+echo Node.js：
+node -v
+echo pnpm：
+pnpm -v
+echo.
+echo 默认开发服务器地址：http://127.0.0.1:5173/
+echo Vite 启动后会在下方显示实际端口地址。
+echo 按 Ctrl+C 可停止开发服务器。
+echo.
+
+pnpm dev
+set "EXIT_CODE=%ERRORLEVEL%"
+
+echo.
+if not "%EXIT_CODE%"=="0" echo [错误] 开发服务器已退出，退出码：%EXIT_CODE%
+if "%EXIT_CODE%"=="0" echo 开发服务器已停止。
+pause
+exit /b %EXIT_CODE%
