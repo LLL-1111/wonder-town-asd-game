@@ -58,16 +58,22 @@ export const balloonTrainingConfig: Record<LevelId, {
   quota: number;
   holdWindowMs: number;
   successOverlapMs: number;
+  cloudCount: number;
+  skyItemCount: number;
+  destination: string;
 }> = {
-  L1: { quota: 4, holdWindowMs: 8000, successOverlapMs: 3000 },
-  L2: { quota: 5, holdWindowMs: 12000, successOverlapMs: 6000 },
-  L3: { quota: 6, holdWindowMs: 16000, successOverlapMs: 10000 },
+  L1: { quota: 4, holdWindowMs: 8000, successOverlapMs: 3000, cloudCount: 1, skyItemCount: 1, destination: '天空小平台' },
+  L2: { quota: 5, holdWindowMs: 12000, successOverlapMs: 6000, cloudCount: 2, skyItemCount: 2, destination: '云端小屋' },
+  L3: { quota: 6, holdWindowMs: 16000, successOverlapMs: 10000, cloudCount: 3, skyItemCount: 3, destination: '彩虹城堡' },
 };
 
 export const balloonTestProtocol = {
   trialCount: 6,
   holdWindowMs: 14000,
   successOverlapMs: 6000,
+  cloudCount: 2,
+  skyItemCount: 2,
+  destination: '云端小屋',
   materialSet: 'TOUCH_01_A_prototype',
   actorIdentityMethod: 'fixed-side-pointerdown-prototype',
   validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION',
