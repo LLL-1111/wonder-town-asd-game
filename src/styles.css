@@ -475,3 +475,40 @@ p { line-height: 1.7; }
 .game-entry h2 { font-size: 28px; }
 .game-entry-button { min-height: 48px; border-radius: 15px; }
 .game-entry-ready { top: 244px; right: 20px; }
+
+/* TOUCH_03: readable paired-swipe controls and a single guided river path. */
+.river-game-page { background: linear-gradient(180deg, #c9e9ef 0, #e9f2d5 68%, #dce9bd 100%); }
+.river-stage { grid-template-rows: auto minmax(330px, 1fr) auto; gap: 13px; padding-top: 13px; }
+.river-status { max-width: 1040px; border-color: #5b99a7; background: rgba(255,253,235,.96); box-shadow: 0 6px 0 rgba(55,104,111,.13), 0 14px 28px rgba(53,96,99,.1); }
+.river-scene { min-height: 350px; isolation: isolate; background: radial-gradient(circle at 12% 15%, rgba(255,255,255,.45) 0 3%, transparent 4%), radial-gradient(circle at 80% 18%, rgba(255,255,255,.38) 0 3%, transparent 4%), linear-gradient(180deg,#a8d88e,#79bd75); box-shadow: inset 0 0 0 8px rgba(255,255,255,.28), inset 0 -18px 35px rgba(51,106,67,.12), 0 14px 30px rgba(64,105,109,.18); }
+.river-scene::before { content: ''; position: absolute; inset: 0; z-index: 0; opacity: .42; background: radial-gradient(ellipse at 19% 82%,#3e8f5d 0 2%,transparent 2.4%),radial-gradient(ellipse at 74% 12%,#4d9d62 0 2%,transparent 2.5%),radial-gradient(ellipse at 88% 79%,#4d9d62 0 1.7%,transparent 2.2%); }
+.river-map { position: absolute; z-index: 1; inset: 7% 2%; width: 96%; height: 86%; overflow: visible; }
+.river-map path { fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.river-bank-path { stroke: #dfcc8e; stroke-width: 116px; filter: drop-shadow(0 8px 4px rgba(64,91,55,.18)); }
+.river-water-path { stroke: #66bdd5; stroke-width: 94px; }
+.river-center-path { stroke: rgba(255,255,255,.48); stroke-width: 3px; stroke-dasharray: 10 11; animation: riverRouteFlow 2.8s linear infinite; }
+.river-route-node circle { fill: rgba(255,255,255,.76); stroke: #398ca7; stroke-width: .7px; vector-effect: non-scaling-stroke; }
+.river-route-node text { fill: #356e78; font-size: 4px; font-weight: 900; text-anchor: middle; paint-order: stroke; stroke: rgba(255,255,255,.88); stroke-width: 1.2px; }
+.river-route-node.passed { opacity: .42; }.river-route-node.passed circle { fill: #dff2d0; }
+.river-route-node.active circle { fill: #fff19a; stroke: #d58a31; animation: riverTargetPulse .75s ease-in-out infinite alternate; }
+.river-route-node.active text { fill: #9b5c27; font-size: 4.6px; }
+.river-scenery { position: absolute; z-index: 2; font-size: 48px; filter: drop-shadow(0 6px 2px rgba(42,88,53,.2)); }.river-scenery-left { left: 3%; bottom: 5%; }.river-scenery-right { right: 4%; top: 7%; }
+.river-boat { translate: -50% -50%; transition: left .72s cubic-bezier(.22,.75,.25,1), top .72s cubic-bezier(.22,.75,.25,1), rotate .35s ease; }
+.river-boat span { display: block; font-size: 68px; transform: rotate(-7deg); filter: drop-shadow(0 8px 3px rgba(30,85,103,.3)); }
+.river-boat i { margin-top: -15px; background: rgba(255,252,224,.95); box-shadow: 0 3px 0 rgba(39,91,94,.16); }
+.river-wobble .river-boat { animation: riverWobble .25s ease-in-out 3 alternate; }.river-success .river-boat span { animation: riverBoatGlide .72s ease; }
+.river-direction-card { left: auto; right: 18px; top: 16px; translate: 0; min-width: 128px; border: 3px solid rgba(255,255,255,.7); background: rgba(255,252,226,.94); }
+.river-controls { max-width: 1180px; grid-template-columns: minmax(285px,1fr) minmax(135px,.35fr) minmax(285px,1fr); gap: 14px; }
+.river-swipe-pad { min-height: 154px; padding: 11px 15px 8px; border: 4px solid rgba(255,255,255,.7); text-align: left; box-shadow: inset 0 -7px 0 rgba(0,0,0,.12),0 8px 0 rgba(68,86,88,.15),0 15px 26px rgba(57,83,88,.1); }
+.river-swipe-pad::after { display: none; }.river-swipe-pad.child { background: linear-gradient(145deg,#58add0,#3488b0); }.river-swipe-pad.parent { background: linear-gradient(145deg,#9a7cbb,#77599d); }
+.river-pad-heading { display: flex !important; align-items: center; justify-content: space-between; font-size: 13px !important; font-weight: 900; opacity: 1 !important; }
+.river-pad-heading em { padding: 4px 8px; border-radius: 99px; background: rgba(255,255,255,.2); font-size: 11px; font-style: normal; }
+.river-gesture-guide { display: block; width: 100%; height: 94px; margin: -5px 0 -7px; overflow: visible; }
+.river-gesture-guide line { stroke: rgba(255,255,255,.78); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 4 5; }.river-gesture-guide marker path { fill: #fff3a2; }.river-gesture-guide text { fill: rgba(255,255,255,.92); font-size: 7px; font-weight: 900; }.river-gesture-guide .guide-start { fill: #fff; stroke: #ffe47a; stroke-width: 3; }.river-gesture-guide .guide-finger { fill: #fff08b; stroke: rgba(82,76,54,.24); stroke-width: 2; filter: drop-shadow(0 2px 2px rgba(39,65,76,.3)); }
+.river-pad-foot { display: block !important; text-align: center; font-size: 11px !important; font-weight: 900; opacity: .9 !important; }
+.river-swipe-pad.tracing { transform: translateY(3px); filter: brightness(1.08); }.river-swipe-pad.tracing .guide-start { fill: #fff08b; }.river-swipe-pad.waiting { filter: none; border-color: #fff09a; box-shadow: inset 0 0 0 4px rgba(255,235,116,.28),0 8px 0 rgba(68,86,88,.15); }.river-swipe-pad.waiting .river-gesture-guide { opacity: .35; }.river-swipe-pad.waiting .river-pad-heading em { background: #fff0a0; color: #67551f; }
+.river-pair-indicator { min-height: 104px; padding: 10px; border-color: rgba(68,136,154,.42); background: rgba(255,253,236,.9); }.river-pair-indicator strong { font-size: 14px; }.river-pair-indicator span { max-width: 120px; font-size: 11px; line-height: 1.35; }.river-pair-indicator.ready { border-color: #efbb4c; box-shadow: 0 0 0 6px rgba(255,221,105,.2),0 5px 0 rgba(68,86,88,.12); }
+@keyframes riverRouteFlow { to { stroke-dashoffset: -42; } }
+@keyframes riverTargetPulse { from { r: 2.8px; } to { r: 3.8px; } }
+@keyframes riverBoatGlide { 35% { transform: rotate(-10deg) translateY(-4px); } 70% { transform: rotate(2deg) translateY(1px); } }
+@media (max-width:760px) { .river-stage { grid-template-rows:auto minmax(270px,1fr) auto; }.river-scene { min-height:270px; }.river-controls { grid-template-columns:1fr 1fr; }.river-swipe-pad { min-width:0; min-height:132px; padding-inline:8px; }.river-gesture-guide { height:80px; }.river-pair-indicator { grid-column:1/-1; grid-row:2; min-height:48px; }.river-direction-card { right:10px; top:10px; min-width:105px; }.river-direction-card strong { font-size:34px; }.river-scenery { font-size:34px; }.river-boat span { font-size:53px; } }
