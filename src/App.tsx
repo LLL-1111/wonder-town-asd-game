@@ -6,12 +6,13 @@ import BalloonGame from './components/BalloonGame';
 import RhythmFountainGame from './components/RhythmFountainGame';
 import RiverDriftGame from './components/RiverDriftGame';
 import RainbowCoasterGame from './components/RainbowCoasterGame';
+import FlightFollowGame from './components/FlightFollowGame';
 import TechLab from './components/TechLab';
 import { domains } from './config/gameCatalog';
 import { downloadEventsCsv, downloadJsonExport, eventStore } from './data/eventStore';
 import type { DomainDefinition, GameMode, TestPhase, TrialSummary } from './types';
 
-type Screen = 'home' | 'phase' | 'domains' | 'games' | 'gaze-game' | 'shopping-helper' | 'seller-game' | 'balloon-game' | 'fountain-game' | 'river-game' | 'coaster-game' | 'tech' | 'data';
+type Screen = 'home' | 'phase' | 'domains' | 'games' | 'gaze-game' | 'shopping-helper' | 'seller-game' | 'balloon-game' | 'fountain-game' | 'river-game' | 'coaster-game' | 'flight-game' | 'tech' | 'data';
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>('home');
@@ -59,6 +60,7 @@ export default function App() {
     return <RiverDriftGame mode={mode} phase={phase} pairId={pairId} onExit={() => setScreen('games')} />;
   }
   if (screen === 'coaster-game') return <RainbowCoasterGame mode={mode} phase={phase} pairId={pairId} onExit={() => setScreen('games')} />;
+  if (screen === 'flight-game') return <FlightFollowGame mode={mode} phase={phase} pairId={pairId} onExit={() => setScreen('games')} />;
   if (screen === 'tech') return <TechLab pairId={pairId} onBack={() => setScreen('home')} />;
   if (screen === 'data') return <DataPage pairId={pairId} onBack={() => setScreen('home')} />;
 
@@ -83,6 +85,7 @@ export default function App() {
         else if (gameId === 'TOUCH_02') setScreen('fountain-game');
         else if (gameId === 'TOUCH_03') setScreen('river-game');
         else if (gameId === 'TOUCH_04') setScreen('coaster-game');
+        else if (gameId === 'TOUCH_05') setScreen('flight-game');
         else setNotice('这个游戏将在下一开发阶段接入，核心机制已经锁定。');
       }} />}
       {notice && <div className="global-notice">{notice}</div>}
@@ -166,7 +169,7 @@ function DomainSelect({ mode, phase, onChoose }: { mode: GameMode; phase: TestPh
 }
 
 function GameSelect({ domain, mode, onBack, onStart }: { domain: DomainDefinition; mode: GameMode; onBack: () => void; onStart: (id: string) => void }) {
-  const gameArt: Record<string, string> = { GAZE_01: '/assets/game-restock.png', GAZE_02: '/assets/game-helper.png', GAZE_03: '/assets/game-seller.png', TOUCH_01: '/assets/module-park.png', TOUCH_02: '/assets/module-park.png', TOUCH_03: '/assets/module-park.png', TOUCH_04: '/assets/module-park.png' };
+  const gameArt: Record<string, string> = { GAZE_01: '/assets/game-restock.png', GAZE_02: '/assets/game-helper.png', GAZE_03: '/assets/game-seller.png', TOUCH_01: '/assets/module-park.png', TOUCH_02: '/assets/module-park.png', TOUCH_03: '/assets/module-park.png', TOUCH_04: '/assets/module-park.png', TOUCH_05: '/assets/module-park.png' };
   return (
     <section className="content-page games-page game-select-page" style={{ '--domain': domain.color, '--domain-pale': domain.pale } as React.CSSProperties}>
       <div className="game-world-header"><button className="world-back" onClick={onBack} aria-label="返回地点">←</button><div><span className="eyebrow">{domain.name}</span><h1>{domain.place}</h1><p>{domain.description}</p></div><span className="world-rule">{mode === 'train' ? domain.id === 'touch' ? '游戏内自动难度递进' : '自动 L1 → L2 → L3' : '固定标准化协议'}</span></div>

@@ -188,6 +188,15 @@ export const rainbowTrainingConfig: Record<LevelId, RainbowTraceConfig> = {
 };
 export const rainbowTestProtocol: RainbowTraceConfig & { trialCount: number; materialSet: string; validationStatus: string } = { quota: 6, trialCount: 6, trackId: 'waves', trialWindowMs: 38000, pairingWindowMs: 550, maxDeviation: .1, minPathCoverage: .78, minSpeedSimilarity: .55, minProcessSimilarity: .62, materialSet: 'TOUCH_04_A_fixed-rainbow-track', validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION' };
 
+export type FlightRouteId = 'straight' | 'curve' | 'multi-turn';
+export type FlightConfig = { quota: number; routeId: FlightRouteId; missionWindowMs: number; requiredCoordinatedMs: number; responseWindowMs: number; obstacleCount: number; dynamicObstacles: boolean };
+export const flightTrainingConfig: Record<LevelId, FlightConfig> = {
+  L1: { quota: 2, routeId: 'straight', missionWindowMs: 30000, requiredCoordinatedMs: 6000, responseWindowMs: 700, obstacleCount: 1, dynamicObstacles: false },
+  L2: { quota: 2, routeId: 'curve', missionWindowMs: 40000, requiredCoordinatedMs: 9000, responseWindowMs: 550, obstacleCount: 2, dynamicObstacles: false },
+  L3: { quota: 2, routeId: 'multi-turn', missionWindowMs: 50000, requiredCoordinatedMs: 12000, responseWindowMs: 450, obstacleCount: 3, dynamicObstacles: true },
+};
+export const flightTestProtocol: FlightConfig & { trialCount: number; materialSet: string; validationStatus: string } = { quota: 6, trialCount: 6, routeId: 'curve', missionWindowMs: 40000, requiredCoordinatedMs: 9000, responseWindowMs: 550, obstacleCount: 2, dynamicObstacles: false, materialSet: 'TOUCH_05_A_fixed-flight-route', validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION' };
+
 export const sellerTrainingConfig: Record<LevelId, { itemCount: number; quota: number; responseWindowMs: number }> = {
   L1: { itemCount: 8, quota: 4, responseWindowMs: 7000 },
   L2: { itemCount: 10, quota: 6, responseWindowMs: 6000 },
