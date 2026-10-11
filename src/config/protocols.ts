@@ -135,6 +135,50 @@ export const fountainTestProtocol: FountainRhythmConfig & {
   validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION',
 };
 
+export type SwipeDirection = 'right' | 'up-right' | 'up' | 'down-right';
+export type RiverDriftConfig = {
+  quota: number;
+  directions: SwipeDirection[];
+  trialWindowMs: number;
+  pairingWindowMs: number;
+  directionToleranceDeg: number;
+  mutualDirectionToleranceDeg: number;
+  minDistance: number;
+  minTrajectorySimilarity: number;
+  minSpeedSimilarity: number;
+  maxAttemptsPerSegment: number;
+  successRate: number;
+};
+
+export const riverTrainingConfig: Record<LevelId, RiverDriftConfig> = {
+  L1: { quota: 2, directions: ['right', 'up-right', 'right'], trialWindowMs: 40000, pairingWindowMs: 650, directionToleranceDeg: 36, mutualDirectionToleranceDeg: 32, minDistance: .3, minTrajectorySimilarity: .55, minSpeedSimilarity: .35, maxAttemptsPerSegment: 2, successRate: .67 },
+  L2: { quota: 2, directions: ['right', 'up-right', 'down-right', 'right'], trialWindowMs: 48000, pairingWindowMs: 500, directionToleranceDeg: 28, mutualDirectionToleranceDeg: 25, minDistance: .34, minTrajectorySimilarity: .62, minSpeedSimilarity: .45, maxAttemptsPerSegment: 2, successRate: .75 },
+  L3: { quota: 2, directions: ['right', 'up-right', 'up', 'down-right', 'right'], trialWindowMs: 56000, pairingWindowMs: 400, directionToleranceDeg: 22, mutualDirectionToleranceDeg: 20, minDistance: .38, minTrajectorySimilarity: .68, minSpeedSimilarity: .55, maxAttemptsPerSegment: 2, successRate: .8 },
+};
+
+export const riverTestProtocol: RiverDriftConfig & {
+  trialCount: number;
+  materialSet: string;
+  actorIdentityMethod: string;
+  validationStatus: string;
+} = {
+  quota: 6,
+  trialCount: 6,
+  directions: ['right', 'up-right', 'down-right', 'right'],
+  trialWindowMs: 42000,
+  pairingWindowMs: 500,
+  directionToleranceDeg: 28,
+  mutualDirectionToleranceDeg: 25,
+  minDistance: .34,
+  minTrajectorySimilarity: .62,
+  minSpeedSimilarity: .45,
+  maxAttemptsPerSegment: 1,
+  successRate: .75,
+  materialSet: 'TOUCH_03_A_fixed-route',
+  actorIdentityMethod: 'fixed-side-pointer-trace-prototype',
+  validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION',
+};
+
 export const sellerTrainingConfig: Record<LevelId, { itemCount: number; quota: number; responseWindowMs: number }> = {
   L1: { itemCount: 8, quota: 4, responseWindowMs: 7000 },
   L2: { itemCount: 10, quota: 6, responseWindowMs: 6000 },
