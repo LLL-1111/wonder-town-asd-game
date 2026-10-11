@@ -197,6 +197,14 @@ export const flightTrainingConfig: Record<LevelId, FlightConfig> = {
 };
 export const flightTestProtocol: FlightConfig & { trialCount: number; materialSet: string; validationStatus: string } = { quota: 6, trialCount: 6, routeId: 'curve', missionWindowMs: 40000, requiredCoordinatedMs: 9000, responseWindowMs: 550, obstacleCount: 2, dynamicObstacles: false, materialSet: 'TOUCH_05_A_fixed-flight-route', validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION' };
 
+export type MysteryFriendConfig = { quota: number; characterCount: number; trialWindowMs: number; minDialogueTurns: number };
+export const mysteryFriendTrainingConfig: Record<LevelId, MysteryFriendConfig> = {
+  L1: { quota: 2, characterCount: 6, trialWindowMs: 120000, minDialogueTurns: 0 },
+  L2: { quota: 2, characterCount: 12, trialWindowMs: 120000, minDialogueTurns: 0 },
+  L3: { quota: 2, characterCount: 24, trialWindowMs: 120000, minDialogueTurns: 0 },
+};
+export const mysteryFriendTestProtocol: MysteryFriendConfig & { trialCount: number; materialSet: string; validationStatus: string } = { quota: 6, trialCount: 6, characterCount: 12, trialWindowMs: 120000, minDialogueTurns: 0, materialSet: 'LANG_01_A_fixed-characters', validationStatus: 'REQUIRES_REAL_PARENT_CHILD_VALIDATION' };
+
 export const sellerTrainingConfig: Record<LevelId, { itemCount: number; quota: number; responseWindowMs: number }> = {
   L1: { itemCount: 8, quota: 4, responseWindowMs: 7000 },
   L2: { itemCount: 10, quota: 6, responseWindowMs: 6000 },

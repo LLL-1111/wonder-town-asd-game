@@ -40,7 +40,7 @@ export const domains: DomainDefinition[] = [
     pale: '#fff0e8',
     description: '轮流表达、认真回应，一起解决小镇任务。',
     games: [
-      { id: 'LANG_01', name: '神秘新朋友', subtitle: '自由问答和人物推理', icon: '🕵️', status: 'planned' },
+      { id: 'LANG_01', name: '神秘新朋友', subtitle: '自由问答和人物推理', icon: '🕵️', status: 'demo-ready' },
       { id: 'LANG_02', name: '画报找不同', subtitle: '描述、询问和共同确认', icon: '🖼️', status: 'planned' },
       { id: 'LANG_03', name: '小镇角色秀', subtitle: '完成生活情境对话', icon: '🎭', status: 'planned' },
     ],

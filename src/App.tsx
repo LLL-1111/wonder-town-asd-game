@@ -7,12 +7,13 @@ import RhythmFountainGame from './components/RhythmFountainGame';
 import RiverDriftGame from './components/RiverDriftGame';
 import RainbowCoasterGame from './components/RainbowCoasterGame';
 import FlightFollowGame from './components/FlightFollowGame';
+import MysteryFriendGame from './components/MysteryFriendGame';
 import TechLab from './components/TechLab';
 import { domains } from './config/gameCatalog';
 import { downloadEventsCsv, downloadJsonExport, eventStore } from './data/eventStore';
 import type { DomainDefinition, GameMode, TestPhase, TrialSummary } from './types';
 
-type Screen = 'home' | 'phase' | 'domains' | 'games' | 'gaze-game' | 'shopping-helper' | 'seller-game' | 'balloon-game' | 'fountain-game' | 'river-game' | 'coaster-game' | 'flight-game' | 'tech' | 'data';
+type Screen = 'home' | 'phase' | 'domains' | 'games' | 'gaze-game' | 'shopping-helper' | 'seller-game' | 'balloon-game' | 'fountain-game' | 'river-game' | 'coaster-game' | 'flight-game' | 'mystery-game' | 'tech' | 'data';
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>('home');
@@ -61,6 +62,7 @@ export default function App() {
   }
   if (screen === 'coaster-game') return <RainbowCoasterGame mode={mode} phase={phase} pairId={pairId} onExit={() => setScreen('games')} />;
   if (screen === 'flight-game') return <FlightFollowGame mode={mode} phase={phase} pairId={pairId} onExit={() => setScreen('games')} />;
+  if (screen === 'mystery-game') return <MysteryFriendGame mode={mode} phase={phase} pairId={pairId} onExit={() => setScreen('games')} />;
   if (screen === 'tech') return <TechLab pairId={pairId} onBack={() => setScreen('home')} />;
   if (screen === 'data') return <DataPage pairId={pairId} onBack={() => setScreen('home')} />;
 
@@ -86,6 +88,7 @@ export default function App() {
         else if (gameId === 'TOUCH_03') setScreen('river-game');
         else if (gameId === 'TOUCH_04') setScreen('coaster-game');
         else if (gameId === 'TOUCH_05') setScreen('flight-game');
+        else if (gameId === 'LANG_01') setScreen('mystery-game');
         else setNotice('这个游戏将在下一开发阶段接入，核心机制已经锁定。');
       }} />}
       {notice && <div className="global-notice">{notice}</div>}
