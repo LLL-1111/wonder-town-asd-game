@@ -2,6 +2,7 @@ export type ActorRole = 'parent' | 'child' | 'system';
 export type GameMode = 'train' | 'test';
 export type TestPhase = 'T0' | 'T1' | null;
 export type LevelId = 'L1' | 'L2' | 'L3';
+export type BalloonLevelId = LevelId | 'L4';
 
 export type TrialOutcome =
   | 'completed_valid'
@@ -20,7 +21,7 @@ export interface GameEvent {
   phase: TestPhase;
   domain_id: string;
   game_id: string;
-  level: LevelId | null;
+  level: BalloonLevelId | null;
   actor_role: ActorRole;
   actor_identity_method: string;
   event_type: string;
@@ -44,7 +45,7 @@ export interface TrialSummary {
   game_id: string;
   mode: GameMode;
   phase: TestPhase;
-  level: LevelId | null;
+  level: BalloonLevelId | null;
   opportunity_index: number;
   target_id: string;
   outcome: TrialOutcome;

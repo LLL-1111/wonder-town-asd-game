@@ -1,4 +1,4 @@
-import type { LevelId } from '../types';
+import type { BalloonLevelId, LevelId } from '../types';
 
 export const versions = {
   config: 'train-gaze-01-prototype-0.1',
@@ -54,25 +54,45 @@ export const shoppingHelperTestProtocol = {
   validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION',
 };
 
-export const balloonTrainingConfig: Record<LevelId, {
+export type BalloonMissionKind = 'launch' | 'cloud-route' | 'star-collection' | 'weather-delivery';
+export type BalloonTarget = { id: string; x: number; altitude: number };
+export type BalloonGate = { id: string; x: number; minAltitude: number; maxAltitude: number };
+export type BalloonWeather = { id: string; startX: number; endX: number; direction: -1 | 1 };
+
+export type BalloonMissionConfig = {
   quota: number;
-  holdWindowMs: number;
-  successOverlapMs: number;
-  cloudCount: number;
-  skyItemCount: number;
+  missionKind: BalloonMissionKind;
+  missionWindowMs: number;
+  launchRequiredMs: number;
+  flightDurationMs: number;
+  cloudGates: BalloonGate[];
+  stars: BalloonTarget[];
+  weather: BalloonWeather[];
   destination: string;
-}> = {
-  L1: { quota: 4, holdWindowMs: 8000, successOverlapMs: 3000, cloudCount: 1, skyItemCount: 1, destination: '天空小平台' },
-  L2: { quota: 5, holdWindowMs: 12000, successOverlapMs: 6000, cloudCount: 2, skyItemCount: 2, destination: '云端小屋' },
-  L3: { quota: 6, holdWindowMs: 16000, successOverlapMs: 10000, cloudCount: 3, skyItemCount: 3, destination: '彩虹城堡' },
 };
 
-export const balloonTestProtocol = {
+export const balloonTrainingConfig: Record<BalloonLevelId, BalloonMissionConfig> = {
+  L1: { quota: 2, missionKind: 'launch', missionWindowMs: 30000, launchRequiredMs: 1800, flightDurationMs: 12000, cloudGates: [], stars: [], weather: [], destination: '天空小平台' },
+  L2: { quota: 2, missionKind: 'cloud-route', missionWindowMs: 40000, launchRequiredMs: 1800, flightDurationMs: 17000, cloudGates: [{ id: 'CLOUD_GATE_1', x: .38, minAltitude: .32, maxAltitude: .62 }, { id: 'CLOUD_GATE_2', x: .68, minAltitude: .48, maxAltitude: .78 }], stars: [], weather: [], destination: '云端小屋' },
+  L3: { quota: 2, missionKind: 'star-collection', missionWindowMs: 50000, launchRequiredMs: 1800, flightDurationMs: 21000, cloudGates: [{ id: 'CLOUD_GATE_1', x: .3, minAltitude: .28, maxAltitude: .62 }], stars: [{ id: 'STAR_1', x: .46, altitude: .7 }, { id: 'STAR_2', x: .7, altitude: .4 }, { id: 'STAR_3', x: .84, altitude: .66 }], weather: [], destination: '彩虹城堡' },
+  L4: { quota: 2, missionKind: 'weather-delivery', missionWindowMs: 60000, launchRequiredMs: 1800, flightDurationMs: 25000, cloudGates: [{ id: 'CLOUD_GATE_1', x: .28, minAltitude: .35, maxAltitude: .65 }, { id: 'CLOUD_GATE_2', x: .72, minAltitude: .5, maxAltitude: .82 }], stars: [{ id: 'STAR_1', x: .52, altitude: .72 }], weather: [{ id: 'WIND_1', startX: .38, endX: .48, direction: 1 }, { id: 'WIND_2', startX: .78, endX: .88, direction: -1 }], destination: '山顶邮局' },
+};
+
+export const balloonTestProtocol: BalloonMissionConfig & {
   trialCount: 6,
-  holdWindowMs: 14000,
-  successOverlapMs: 6000,
-  cloudCount: 2,
-  skyItemCount: 2,
+  materialSet: 'TOUCH_01_A_prototype',
+  actorIdentityMethod: 'fixed-side-pointerdown-prototype',
+  validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION',
+} = {
+  quota: 6,
+  trialCount: 6,
+  missionKind: 'star-collection',
+  missionWindowMs: 50000,
+  launchRequiredMs: 1800,
+  flightDurationMs: 21000,
+  cloudGates: [{ id: 'TEST_GATE_1', x: .32, minAltitude: .3, maxAltitude: .64 }],
+  stars: [{ id: 'TEST_STAR_1', x: .5, altitude: .7 }, { id: 'TEST_STAR_2', x: .76, altitude: .42 }],
+  weather: [],
   destination: '云端小屋',
   materialSet: 'TOUCH_01_A_prototype',
   actorIdentityMethod: 'fixed-side-pointerdown-prototype',

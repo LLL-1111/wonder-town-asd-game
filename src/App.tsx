@@ -156,7 +156,7 @@ function GameSelect({ domain, mode, onBack, onStart }: { domain: DomainDefinitio
   const gameArt: Record<string, string> = { GAZE_01: '/assets/game-restock.png', GAZE_02: '/assets/game-helper.png', GAZE_03: '/assets/game-seller.png', TOUCH_01: '/assets/module-park.png' };
   return (
     <section className="content-page games-page game-select-page" style={{ '--domain': domain.color, '--domain-pale': domain.pale } as React.CSSProperties}>
-      <div className="game-world-header"><button className="world-back" onClick={onBack} aria-label="返回地点">←</button><div><span className="eyebrow">{domain.name}</span><h1>{domain.place}</h1><p>{domain.description}</p></div><span className="world-rule">{mode === 'train' ? '自动 L1 → L2 → L3' : '固定标准化协议'}</span></div>
+      <div className="game-world-header"><button className="world-back" onClick={onBack} aria-label="返回地点">←</button><div><span className="eyebrow">{domain.name}</span><h1>{domain.place}</h1><p>{domain.description}</p></div><span className="world-rule">{mode === 'train' ? domain.id === 'touch' ? '自动 L1 → L2 → L3 → L4' : '自动 L1 → L2 → L3' : '固定标准化协议'}</span></div>
       <div className="game-entry-grid">
         {domain.games.map((game, index) => <article className={`game-entry ${game.status}`} key={game.id}>
           <div className="game-entry-art">{gameArt[game.id] ? <img src={gameArt[game.id]} alt="" /> : <div className={`game-entry-placeholder game-entry-placeholder-${index}`} />}</div>

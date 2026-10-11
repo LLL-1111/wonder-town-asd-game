@@ -361,6 +361,41 @@ p { line-height: 1.7; }
 @keyframes balloonSparkle { from { opacity: .35; transform: translateY(4px); } to { opacity: .95; transform: translateY(-5px); } }
 .balloon-controls { max-width: 1060px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: 1fr minmax(120px, .5fr) 1fr; align-items: center; gap: 16px; }.balloon-pad { min-height: 94px; border: 0; border-radius: 22px; color: white; touch-action: none; user-select: none; box-shadow: inset 0 -7px 0 rgba(0,0,0,.16), 0 8px 0 rgba(68,86,88,.16); cursor: pointer; }.balloon-pad.child { background: #4d9fc2; }.balloon-pad.parent { background: #8c70ad; }.balloon-pad span, .balloon-pad strong { display: block; }.balloon-pad span { font-size: 13px; opacity: .88; }.balloon-pad strong { margin-top: 5px; font-size: 20px; }.balloon-pad.pressed { transform: translateY(5px) scale(.98); box-shadow: inset 0 -2px 0 rgba(0,0,0,.16); filter: brightness(1.08); }.balloon-progress { height: 14px; border-radius: 99px; overflow: hidden; background: rgba(255,255,255,.7); box-shadow: inset 0 2px 4px rgba(63,85,81,.12); }.balloon-progress span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #f2b64e, #e87b7f); transition: width .1s linear; }
 @media (max-width: 760px) { .balloon-stage { padding-inline: 10px; }.balloon-scene { min-height: 260px; }.balloon-controls { grid-template-columns: 1fr 1fr; gap: 10px; }.balloon-progress { grid-column: 1 / -1; grid-row: 2; }.balloon-pad { min-height: 78px; }.balloon-pad strong { font-size: 16px; } }
+
+/* TOUCH_01 mission flight: shared hold controls the vehicle, not a timer bar. */
+.balloon-scene { display: block; min-height: 390px; isolation: isolate; }
+.balloon-route-line { position: absolute; z-index: 0; left: 4%; right: 4%; top: 51%; border-top: 3px dashed rgba(255,255,255,.28); }
+.balloon-craft { position: absolute; z-index: 5; width: 132px; height: 190px; margin-left: -66px; margin-top: -70px; transition: top .1s linear; }
+.balloon-craft .balloon-visual { position: relative; transition: transform .18s ease; }
+.balloon-cargo { position: absolute; z-index: 4; left: 47px; top: 178px; width: 40px; height: 32px; display: grid; place-items: center; border-radius: 7px 7px 11px 11px; background: #ad754b; box-shadow: inset 0 -5px 0 rgba(79,42,24,.18); font-size: 19px; }
+.balloon-gate { position: absolute; z-index: 2; width: 92px; min-height: 72px; margin-left: -46px; border: 8px solid rgba(255,255,255,.84); border-top-width: 18px; border-bottom-width: 18px; border-radius: 45%; box-shadow: 0 0 0 5px rgba(115,185,216,.32); transition: left .1s linear, opacity .2s ease; }
+.balloon-gate::before, .balloon-gate::after { content: ''; position: absolute; left: -22px; right: -22px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.78); }
+.balloon-gate::before { top: -24px; }.balloon-gate::after { bottom: -24px; }
+.balloon-gate span { position: absolute; left: 50%; top: 50%; translate: -50% -50%; padding: 3px 7px; border-radius: 8px; background: rgba(61,128,159,.72); color: white; font-size: 11px; font-weight: 900; white-space: nowrap; }
+.balloon-gate.completed { opacity: .25; }
+.balloon-star { position: absolute; z-index: 3; margin: -24px 0 0 -24px; color: #ffe56f; font-size: 48px; line-height: 1; filter: drop-shadow(0 4px 0 rgba(194,132,38,.3)); animation: balloonStarPulse .75s ease-in-out infinite alternate; transition: left .1s linear, opacity .2s ease, transform .2s ease; }
+.balloon-star.collected { opacity: 0; transform: scale(1.8) rotate(35deg); }
+.balloon-wind { position: absolute; z-index: 1; top: 18%; bottom: 21%; display: grid; place-items: center; overflow: hidden; border-radius: 30px; color: rgba(255,255,255,.72); background: repeating-linear-gradient(170deg, transparent 0 18px, rgba(255,255,255,.12) 18px 24px); font-size: 34px; font-weight: 900; opacity: .55; transition: left .1s linear, opacity .2s ease; }
+.balloon-wind.active { opacity: 1; animation: balloonWindPulse .6s ease-in-out infinite alternate; }
+.balloon-destination { right: auto; bottom: 16%; min-width: 110px; text-align: center; transition: left .1s linear; }
+.balloon-hud { position: absolute; z-index: 7; left: 14px; right: 14px; bottom: 12px; display: flex; justify-content: center; gap: 8px; pointer-events: none; }
+.balloon-hud span { min-width: 82px; padding: 7px 10px; border-radius: 13px; background: rgba(255,252,228,.88); color: #69817c; text-align: center; font-size: 10px; font-weight: 800; box-shadow: 0 4px 0 rgba(61,92,86,.12); }
+.balloon-hud strong { display: block; margin-top: 2px; color: #405e62; font-size: 14px; }
+.balloon-visual.is-wobbling { animation: balloonWobble .35s ease-in-out infinite alternate; }
+.balloon-sync-orb { min-height: 64px; display: grid; place-items: center; padding: 8px; border: 4px solid rgba(90,141,165,.45); border-radius: 50%; background: rgba(255,255,255,.74); color: #668087; text-align: center; font-size: 12px; box-shadow: 0 5px 0 rgba(68,86,88,.12); }
+.balloon-sync-orb.synced { border-color: #f1b74f; background: #fff0a9; color: #9a632b; animation: balloonSyncPulse .6s ease-in-out infinite alternate; }
+@keyframes balloonWobble { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+@keyframes balloonStarPulse { from { transform: scale(.9) rotate(-5deg); } to { transform: scale(1.1) rotate(5deg); } }
+@keyframes balloonWindPulse { from { translate: -4px 0; } to { translate: 4px 0; } }
+@keyframes balloonSyncPulse { from { scale: .97; } to { scale: 1.03; } }
+@media (max-width: 760px) {
+  .balloon-scene { min-height: 320px; }
+  .balloon-craft { scale: .78; }
+  .balloon-gate { scale: .82; }
+  .balloon-hud { gap: 4px; }
+  .balloon-hud span { min-width: 62px; padding-inline: 5px; }
+  .balloon-sync-orb { grid-column: 1 / -1; grid-row: 2; min-height: 42px; border-radius: 18px; }
+}
 .app-topbar .icon-button { background: #fffdf1; border: 2px solid #e8c98d; color: #5b806f; box-shadow: 0 3px 0 #d4b77a; }
 .app-topbar .brand-mark { background: #5b806f; color: #fff7dd; box-shadow: 0 3px 0 #3f6656; }
 .app-topbar .brand-mini small, .app-topbar .status-pill { color: #96704e; }
