@@ -27,7 +27,7 @@ export const domains: DomainDefinition[] = [
       { id: 'TOUCH_01', name: '气球飞上天', subtitle: '共同长按', icon: '🎈', status: 'demo-ready' },
       { id: 'TOUCH_02', name: '音乐喷泉秀', subtitle: '节奏点击', icon: '⛲', status: 'demo-ready' },
       { id: 'TOUCH_03', name: '欢乐漂流记', subtitle: '共同滑动', icon: '🛶', status: 'demo-ready' },
-      { id: 'TOUCH_04', name: '彩虹过山车', subtitle: '同步描线', icon: '🎢', status: 'planned' },
+      { id: 'TOUCH_04', name: '彩虹过山车', subtitle: '同步描线', icon: '🎢', status: 'demo-ready' },
       { id: 'TOUCH_05', name: '飞行小飞机', subtitle: '领航跟随', icon: '✈️', status: 'planned' },
     ],
   },
@@ -64,5 +64,5 @@ export const domains: DomainDefinition[] = [
 export const implementationStatus = {
   phase: '阶段 0 + 阶段 A + 阶段 C 样板',
   version: '0.1.0-prototype',
-  notice: '《超市大忙碌》三个游戏与《气球飞上天》《音乐喷泉秀》《欢乐漂流记》已接入可运行原型；其余模块按后续开发阶段接入。',
+  notice: '《超市大忙碌》三个游戏与《气球飞上天》《音乐喷泉秀》《欢乐漂流记》《彩虹过山车》已接入可运行原型；其余模块按后续开发阶段接入。',
 };

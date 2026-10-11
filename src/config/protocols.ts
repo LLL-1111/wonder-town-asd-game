@@ -179,6 +179,15 @@ export const riverTestProtocol: RiverDriftConfig & {
   validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION',
 };
 
+export type RainbowTrackId = 'gentle' | 'waves' | 'rainbow';
+export type RainbowTraceConfig = { quota: number; trackId: RainbowTrackId; trialWindowMs: number; pairingWindowMs: number; maxDeviation: number; minPathCoverage: number; minSpeedSimilarity: number; minProcessSimilarity: number };
+export const rainbowTrainingConfig: Record<LevelId, RainbowTraceConfig> = {
+  L1: { quota: 2, trackId: 'gentle', trialWindowMs: 30000, pairingWindowMs: 700, maxDeviation: .12, minPathCoverage: .7, minSpeedSimilarity: .45, minProcessSimilarity: .55 },
+  L2: { quota: 2, trackId: 'waves', trialWindowMs: 38000, pairingWindowMs: 550, maxDeviation: .1, minPathCoverage: .78, minSpeedSimilarity: .55, minProcessSimilarity: .62 },
+  L3: { quota: 2, trackId: 'rainbow', trialWindowMs: 46000, pairingWindowMs: 450, maxDeviation: .08, minPathCoverage: .84, minSpeedSimilarity: .65, minProcessSimilarity: .7 },
+};
+export const rainbowTestProtocol: RainbowTraceConfig & { trialCount: number; materialSet: string; validationStatus: string } = { quota: 6, trialCount: 6, trackId: 'waves', trialWindowMs: 38000, pairingWindowMs: 550, maxDeviation: .1, minPathCoverage: .78, minSpeedSimilarity: .55, minProcessSimilarity: .62, materialSet: 'TOUCH_04_A_fixed-rainbow-track', validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION' };
+
 export const sellerTrainingConfig: Record<LevelId, { itemCount: number; quota: number; responseWindowMs: number }> = {
   L1: { itemCount: 8, quota: 4, responseWindowMs: 7000 },
   L2: { itemCount: 10, quota: 6, responseWindowMs: 6000 },
