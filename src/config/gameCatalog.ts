@@ -41,8 +41,8 @@ export const domains: DomainDefinition[] = [
     description: '轮流表达、认真回应，一起解决小镇任务。',
     games: [
       { id: 'LANG_01', name: '神秘新朋友', subtitle: '自由问答和人物推理', icon: '🕵️', status: 'demo-ready' },
-      { id: 'LANG_02', name: '画报找不同', subtitle: '描述、询问和共同确认', icon: '🖼️', status: 'planned' },
-      { id: 'LANG_03', name: '小镇角色秀', subtitle: '完成生活情境对话', icon: '🎭', status: 'planned' },
+      { id: 'LANG_02', name: '画报找不同', subtitle: '描述、倾听和共同确认', icon: '🖼️', status: 'demo-ready' },
+      { id: 'LANG_03', name: '小镇角色秀', subtitle: '完成生活情境对话', icon: '🎭', status: 'demo-ready' },
     ],
   },
   {
@@ -54,8 +54,8 @@ export const domains: DomainDefinition[] = [
     pale: '#f2e9fb',
     description: '看故事、做表情、学习温柔的调节方法。',
     games: [
-      { id: 'EMO_01', name: '小镇心情故事', subtitle: '独立选择，再一起聊聊', icon: '📖', status: 'planned' },
-      { id: 'EMO_02', name: '情绪模仿秀', subtitle: '轮流完成指定表情任务', icon: '📷', status: 'planned' },
+      { id: 'EMO_01', name: '小镇心情故事', subtitle: '独立选择，再一起聊聊', icon: '📖', status: 'demo-ready' },
+      { id: 'EMO_02', name: '情绪模仿秀', subtitle: '共同体验并表达同一种心情', icon: '🎭', status: 'demo-ready' },
       { id: 'EMO_03', name: '心情加油站', subtitle: '共同练习调节方法', icon: '🌿', status: 'planned' },
     ],
   },
@@ -64,5 +64,5 @@ export const domains: DomainDefinition[] = [
 export const implementationStatus = {
   phase: '阶段 0 + 阶段 A + 阶段 C 样板',
   version: '0.1.0-prototype',
-  notice: '《超市大忙碌》三个游戏与《乐园大冒险》五个触摸游戏已接入可运行原型；其余模块按后续开发阶段接入。',
+  notice: '《超市大忙碌》《乐园大冒险》和《小镇有话说》的核心游戏已接入可运行原型；情绪模块按后续开发阶段接入。',
 };
