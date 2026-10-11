@@ -99,6 +99,42 @@ export const balloonTestProtocol: BalloonMissionConfig & {
   validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION',
 };
 
+export type FountainCueMode = 'shared-pulse' | 'alternating-leader';
+export type FountainRhythmConfig = {
+  quota: number;
+  beatOffsetsMs: number[];
+  responseWindowMs: number;
+  syncWindowMs: number;
+  cueFlashMs: number;
+  successRate: number;
+  cueMode: FountainCueMode;
+};
+
+export const fountainTrainingConfig: Record<LevelId, FountainRhythmConfig> = {
+  L1: { quota: 2, beatOffsetsMs: [1000, 2200, 3400, 4600], responseWindowMs: 500, syncWindowMs: 350, cueFlashMs: 500, successRate: .75, cueMode: 'shared-pulse' },
+  L2: { quota: 2, beatOffsetsMs: [900, 1650, 2400, 3500, 4250, 5000], responseWindowMs: 420, syncWindowMs: 280, cueFlashMs: 380, successRate: .67, cueMode: 'shared-pulse' },
+  L3: { quota: 2, beatOffsetsMs: [800, 1450, 2100, 3050, 3700, 4350, 5300, 5950], responseWindowMs: 360, syncWindowMs: 240, cueFlashMs: 300, successRate: .625, cueMode: 'alternating-leader' },
+};
+
+export const fountainTestProtocol: FountainRhythmConfig & {
+  trialCount: number;
+  materialSet: string;
+  actorIdentityMethod: string;
+  validationStatus: string;
+} = {
+  quota: 6,
+  trialCount: 6,
+  beatOffsetsMs: [900, 1700, 2500, 3600, 4400, 5200],
+  responseWindowMs: 420,
+  syncWindowMs: 280,
+  cueFlashMs: 340,
+  successRate: .67,
+  cueMode: 'shared-pulse',
+  materialSet: 'TOUCH_02_A_fixed-rhythm',
+  actorIdentityMethod: 'fixed-side-pointerdown-prototype',
+  validationStatus: 'REQUIRES_REAL_TABLET_VALIDATION',
+};
+
 export const sellerTrainingConfig: Record<LevelId, { itemCount: number; quota: number; responseWindowMs: number }> = {
   L1: { itemCount: 8, quota: 4, responseWindowMs: 7000 },
   L2: { itemCount: 10, quota: 6, responseWindowMs: 6000 },
